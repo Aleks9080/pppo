@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="user2Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="user2ModelStoreContainer">
+    <EntitySet Name="Orders" EntityType="user2Model.Store.Orders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OrderProducts" EntityType="user2Model.Store.OrderProducts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PickupPoints" EntityType="user2Model.Store.PickupPoints" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Products" EntityType="user2Model.Store.Products" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Roles" EntityType="user2Model.Store.Roles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="user2Model.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="user2Model.Store.Users" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK__OrderProd__Order__2D27B809" Association="user2Model.Store.FK__OrderProd__Order__2D27B809">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="OrderProduct" EntitySet="OrderProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_PickupPoint" Association="user2Model.Store.FK_Order_PickupPoint">
+      <End Role="PickupPoint" EntitySet="PickupPoints" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderProd__Produ__2E1BDC42" Association="user2Model.Store.FK__OrderProd__Produ__2E1BDC42">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="OrderProduct" EntitySet="OrderProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__User__UserRole__267ABA7A" Association="user2Model.Store.FK__User__UserRole__267ABA7A">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderStatus" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OrderDeliveryDate" Type="datetime" Nullable="false" />
+    <Property Name="OrderPickupPoint" Type="bigint" Nullable="false" />
+    <Property Name="Client" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="OrderCreate" Type="datetime" Nullable="true" />
+    <Property Name="OrrderCode" Type="nvarchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="OrderProducts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="OrderID" Type="int" Nullable="false" />
+    <Property Name="ProductArticleNumber" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Count" Type="int" Nullable="true" />
+    <Property Name="Id" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PickupPoints">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Index" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ProductArticleNumber" />
+    </Key>
+    <Property Name="ProductArticleNumber" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="ProductName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ProductDescription" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ProductCategory" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ProductPhoto" Type="varbinary(max)" Nullable="true" />
+    <Property Name="ProductManufacturer" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ProductCost" Type="decimal" Nullable="true" Precision="19" Scale="4" />
+    <Property Name="ProductDiscountAmount" Type="tinyint" Nullable="true" />
+    <Property Name="ProductQuantityInStock" Type="int" Nullable="true" />
+    <Property Name="ProductMaxDiscountAmount" Type="tinyint" Nullable="true" />
+    <Property Name="ProductProvider" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="ProductUnit" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="ProductPhotoUrl" Type="nvarchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" Nullable="true" />
+    <Property Name="definition" Type="varbinary(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserSurname" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="UserPatronymic" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="UserLogin" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserPassword" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserRole" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__OrderProd__Order__2D27B809">
+    <End Role="Order" Type="user2Model.Store.Orders" Multiplicity="1" />
+    <End Role="OrderProduct" Type="user2Model.Store.OrderProducts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderProduct">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_PickupPoint">
+    <End Role="PickupPoint" Type="user2Model.Store.PickupPoints" Multiplicity="1" />
+    <End Role="Order" Type="user2Model.Store.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PickupPoint">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="OrderPickupPoint" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderProd__Produ__2E1BDC42">
+    <End Role="Product" Type="user2Model.Store.Products" Multiplicity="1" />
+    <End Role="OrderProduct" Type="user2Model.Store.OrderProducts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductArticleNumber" />
+      </Principal>
+      <Dependent Role="OrderProduct">
+        <PropertyRef Name="ProductArticleNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__User__UserRole__267ABA7A">
+    <End Role="Role" Type="user2Model.Store.Roles" Multiplicity="1" />
+    <End Role="User" Type="user2Model.Store.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="UserRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
